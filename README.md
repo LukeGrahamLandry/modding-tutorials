@@ -1,7 +1,7 @@
-# Forge 1.15 Modding Tutorial 
+# Minecraft Forge 1.15 Modding Tutorials
 - This repository has the code for my tutorial series on creating minecraft mods with forge
 - Watch the tutorials on youtube: 
-- Text scripts for the tutorials in the tutorials/ directory 
+- Read the scripts for the tutorials: https://github.com/LukeGrahamLandry/forge-modding-tutorial/tree/master/tutorials
 
 ## Contact
 - For any questions, problems, etc: https://discord.gg/VbZVnRd
