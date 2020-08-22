@@ -1,8 +1,14 @@
 package com.lukegraham.firstmod;
 
+import com.lukegraham.firstmod.init.FeatureInit;
 import com.lukegraham.firstmod.init.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.placement.IPlacementConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,6 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,7 +32,7 @@ import java.util.stream.Collectors;
 public class FirstMod
 {
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public static String MOD_ID = "firstmod";
 
@@ -41,7 +48,9 @@ public class FirstMod
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {}
+    private void setup(final FMLCommonSetupEvent event) {
+        FeatureInit.addToBiomes();  // makes structures spawn
+    }
 
     private void doClientStuff(final FMLClientSetupEvent event) {}
 
