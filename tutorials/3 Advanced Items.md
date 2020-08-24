@@ -32,7 +32,7 @@ This will extend item, make sure you import the one from net dot Minecraft
 and we can have intellij add the default constructer 
 Then we can add the get burn time function
 It takes in the item stack used as fuel and returns how long the fuel will burn in ticks
-So 32 hundred is twice a coal so it should do half a stack
+So 32 hundred is twice a coal so it should do 1/4 a stack
 Then we can go back to ItemInit and import the FuelItem class
 
 So now an actually advanced item, lets make one that teleports you where you're looking
@@ -82,7 +82,7 @@ Just remember to change the names of the file and any time you use the name of t
 Then we can run the game and test it out
 Our items show up in our creative tab and have textures 
 We can see I can eat this cherry and sometimes get fire resistance
-This blue coal can be used in a furnace and smelt 32 items 
+This blue coal can be used in a furnace and smelt 16 items 
 And this staff will teleport me and lose durability
 
 Thanks for watching

@@ -20,6 +20,7 @@ public class TeleportStaff extends Item {
         super(properties);
     }
 
+    // adds a tool tip when you hover over the item in your inventory and press shift
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (KeyboardHelper.isHoldingShift()){
@@ -31,19 +32,27 @@ public class TeleportStaff extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        // only allow the player to use it every 3 seconds
         playerIn.getCooldownTracker().setCooldown(this, 60);
 
+        // get where the player is looking and move them there
         Vec3d lookPos = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.NONE).getHitVec();
         playerIn.setPosition(lookPos.x, lookPos.y, lookPos.z);
 
+        // allow the teleport to cancel fall damage
         playerIn.fallDistance = 0F;
+
+        // reduce durability
         ItemStack stack = playerIn.getHeldItem(handIn);
         stack.setDamage(stack.getDamage() + 1);
+
+        // break if durability gets to 0
         if (stack.getDamage() == 0) stack.setCount(0);
 
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
+    // the same as Item.rayTrace(World, PlayerEntity, FluidMode) but with a longer range
     protected static RayTraceResult rayTrace(World worldIn, PlayerEntity player, RayTraceContext.FluidMode fluidMode) {
         double range = 10; // player.getAttribute(PlayerEntity.REACH_DISTANCE).getValue();;
 

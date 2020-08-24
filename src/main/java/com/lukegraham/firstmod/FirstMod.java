@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @Mod("firstmod")
 public class FirstMod
 {
-    // Directly reference a log4j logger.
+    // Let's you print to the console with FirstMod.LOGGER.debug(String)
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static String MOD_ID = "firstmod";

@@ -42,6 +42,7 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
  */
 public class HousePieces
 {
+    // nbt file at src/main/resources/firstmod/structures made with structure block
     private static final ResourceLocation HOUSE = new ResourceLocation(FirstMod.MOD_ID + ":house");
     private static final Map<ResourceLocation, BlockPos> OFFSET = ImmutableMap.of(HOUSE, new BlockPos(0, 1, 0));
 
@@ -136,13 +137,15 @@ public class HousePieces
         @Override
         protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand, MutableBoundingBox sbb)
         {
-            FirstMod.LOGGER.debug("data marker");
+            // if the structure block's data tag is "chest" ...
             if ("chest".equals(function)) {
+                // remove the structure block and get the chest under it
+                // for some reason just replacing the structure block with a chest broke for me so I did it this way
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
                 TileEntity tileentity = worldIn.getTileEntity(pos.down());
-                FirstMod.LOGGER.debug("func is chest");
                 if (tileentity instanceof ChestTileEntity) {  // Should always be true
-                    FirstMod.LOGGER.debug("te is chest");
+                    // sets the chest's loot table so random loot generated when you open the chest
+                    // uses loot table located at src/main/resources/data/firstmod/loot_tables/chest/house.json
                     ResourceLocation ltable = new ResourceLocation(FirstMod.MOD_ID, "chest/house");
                     ((ChestTileEntity)tileentity).setLootTable(ltable, rand.nextLong());
                 }
