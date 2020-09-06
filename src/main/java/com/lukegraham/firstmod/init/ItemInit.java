@@ -3,11 +3,8 @@ package com.lukegraham.firstmod.init;
 import com.lukegraham.firstmod.FirstMod;
 import com.lukegraham.firstmod.items.FuelItem;
 import com.lukegraham.firstmod.items.TeleportStaff;
-import javafx.scene.effect.Effect;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import com.lukegraham.firstmod.util.ModItemTier;
+import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.RegistryObject;
@@ -30,9 +27,26 @@ public class ItemInit {
     public static final RegistryObject<Item> FUEL = ITEMS.register("fuel",
             () -> new FuelItem(new Item.Properties().group(ModItemGroup.instance)));
 
-    // an item that teleports you forward when you right click
+    // an item that teleports you forward when you right click. Uses durability, has a tooltip and cooldown
     public static final RegistryObject<Item> TELEPORT_STAFF = ITEMS.register("teleport_staff",
             () -> new TeleportStaff(new Item.Properties().group(ModItemGroup.instance).maxDamage(50)));
+
+    // basic tool set
+    public static final RegistryObject<Item> PINK_SWORD = ITEMS.register("pink_sword",
+            () -> new SwordItem(ModItemTier.PINK, 3, -2.4F, new Item.Properties().group(ModItemGroup.instance)));
+
+    public static final RegistryObject<Item> PINK_PICKAXE = ITEMS.register("pink_pickaxe",
+            () -> new PickaxeItem(ModItemTier.PINK,1, -1.0F, new Item.Properties().group(ModItemGroup.instance)));
+
+    public static final RegistryObject<Item> PINK_AXE = ITEMS.register("pink_axe",
+            () -> new AxeItem(ModItemTier.PINK, 6, -3.4F, new Item.Properties().group(ModItemGroup.instance)));
+
+    public static final RegistryObject<Item> PINK_SHOVEL = ITEMS.register("pink_shovel",
+            () -> new ShovelItem(ModItemTier.PINK, 1, -1.0F, new Item.Properties().group(ModItemGroup.instance)));
+
+    public static final RegistryObject<Item> PINK_HOE = ITEMS.register("pink_hoe",
+            () -> new HoeItem(ModItemTier.PINK, -1.0F, new Item.Properties().group(ModItemGroup.instance)));
+
 
     // a new creative tab
     public static class ModItemGroup extends ItemGroup {

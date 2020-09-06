@@ -28,14 +28,14 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry in the META-INF/mods.toml file and the MOD_ID constant below
 @Mod("firstmod")
 public class FirstMod
 {
     // Let's you print to the console with FirstMod.LOGGER.debug(String)
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static String MOD_ID = "firstmod";
+    public static final String MOD_ID = "firstmod";
 
     public FirstMod() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -43,8 +43,8 @@ public class FirstMod
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::doClientStuff);
 
-        ItemInit.ITEMS.register(modEventBus);
-        BlockInit.BLOCKS.register(modEventBus);
+        ItemInit.ITEMS.register(modEventBus);    // registers your items
+        BlockInit.BLOCKS.register(modEventBus);  // registers your blocks
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -56,7 +56,6 @@ public class FirstMod
 
     private void doClientStuff(final FMLClientSetupEvent event) {}
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {}
 

@@ -6,6 +6,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
 
+/*
+    Some functions for getting user input
+    ex. for displaying extra information when holding shift
+*/
 public class KeyboardHelper {
     private static final long WINDOW = Minecraft.getInstance().getMainWindow().getHandle();
 
