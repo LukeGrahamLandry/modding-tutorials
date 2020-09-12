@@ -3,8 +3,10 @@ package com.lukegraham.firstmod;
 import com.lukegraham.firstmod.init.BlockInit;
 import com.lukegraham.firstmod.init.FeatureInit;
 import com.lukegraham.firstmod.init.ItemInit;
+import com.lukegraham.firstmod.world.gen.OreGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.IFeatureConfig;
@@ -52,6 +54,7 @@ public class FirstMod
 
     private void setup(final FMLCommonSetupEvent event) {
         FeatureInit.addToBiomes();  // makes structures spawn
+        OreGen.addOresToBiomes();   // makes ores generate
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {}
