@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:enderpearl"
+    },
+    {
+      "item": "firstmod:smile"
+    }
+  ],
+  "result": {
+    "item": "firstmod:teleport_staff"
+  }
+}
