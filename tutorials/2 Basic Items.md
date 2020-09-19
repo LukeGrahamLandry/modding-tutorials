@@ -3,10 +3,6 @@
 In this tutorial we make a simple item with deferred registers, 
 give it a texture, and put it in a custom creative tab.
 
-Ask Me Questions: https://discord.gg/VbZVnRd
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial
-Donate: https://www.patreon.com/LukeGrahamLandry
-
 Online Pixel Art Editor: https://www.piskelapp.com/p/create  
 Minecraft Assets: https://github.com/LukeGrahamLandry/minecraft-assets  
 ^ Useful if you want to base your textures on Vanilla ones  

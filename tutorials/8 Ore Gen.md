@@ -2,10 +2,6 @@
 
 In this tutorial we make new ores generate in the nether and the end
 
-Ask Me Questions: https://discord.gg/VbZVnRd
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial
-Donate: https://www.patreon.com/LukeGrahamLandry
-
 ## Script
 
 In your world package make a package called gen 

@@ -2,11 +2,7 @@
 
 In this tutorial we make a furnace fuel, 
 a food that grants a potion effect 
-and an item that teleports you when right clicked.
-
-Ask Me Questions: https://discord.gg/VbZVnRd  
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial  
-Donate: https://www.patreon.com/LukeGrahamLandry  
+and an item that teleports you when right clicked  
 
 ## Script
 

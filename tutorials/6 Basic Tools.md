@@ -2,10 +2,6 @@
 
 In this tutorial we make a basic set of tools
 
-Ask Me Questions: https://discord.gg/VbZVnRd
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial
-Donate: https://www.patreon.com/LukeGrahamLandry
-
 ## Script
 
 In your util package make a new enum called ModItemTier

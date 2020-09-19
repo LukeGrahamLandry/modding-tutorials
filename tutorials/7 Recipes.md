@@ -2,10 +2,6 @@
 
 In this tutorial we make crafting table and furnace recipes
 
-Ask Me Questions: https://discord.gg/VbZVnRd
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial
-Donate: https://www.patreon.com/LukeGrahamLandry
-
 ## Script
 
 In src main resources data mod id make a new folder called recipes 

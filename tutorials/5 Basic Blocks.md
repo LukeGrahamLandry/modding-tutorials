@@ -2,10 +2,6 @@
 
 In this tutorial we make a simple block
 
-Ask Me Questions: https://discord.gg/VbZVnRd
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial
-Donate: https://www.patreon.com/LukeGrahamLandry
-
 ## Script
 
 In the init package make a new class called BlockInit 

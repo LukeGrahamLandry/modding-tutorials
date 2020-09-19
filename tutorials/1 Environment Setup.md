@@ -9,10 +9,6 @@ Java 8 JRE: oracle.com/java/technologies/javase-jre8-downloads.html
 Forge 1.15.2: https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.15.2.html
 Intellij IDEA: https://www.jetbrains.com/idea/download
 
-Ask Me Questions: https://discord.gg/VbZVnRd  
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial  
-Donate: https://www.patreon.com/LukeGrahamLandry  
-
 ## Script
 
 Step one of modding is downloading a bunch of things

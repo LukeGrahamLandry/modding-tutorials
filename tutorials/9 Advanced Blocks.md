@@ -1,3 +1,9 @@
+## Description
+
+In this tutorial we make a block that does something when right clicked, placed or exploded (also works as soil)
+
+## Script
+
 This is going to be quite similar to advanced items
 
 Make a new package called blocks and in that a new class which extends Block

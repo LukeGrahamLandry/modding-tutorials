@@ -3,7 +3,9 @@ package com.lukegraham.firstmod.init;
 import com.lukegraham.firstmod.FirstMod;
 import com.lukegraham.firstmod.items.FuelItem;
 import com.lukegraham.firstmod.items.TeleportStaff;
+import com.lukegraham.firstmod.util.ModArmorMaterial;
 import com.lukegraham.firstmod.util.ModItemTier;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -48,6 +50,18 @@ public class ItemInit {
     public static final RegistryObject<Item> PINK_HOE = ITEMS.register("pink_hoe",
             () -> new HoeItem(ModItemTier.PINK, -1.0F, new Item.Properties().group(ModItemGroup.instance)));
 
+    // a basic armor set
+    public static final RegistryObject<Item> PINK_HELMET = ITEMS.register("pink_helmet",
+            () -> new ArmorItem(ModArmorMaterial.PINK, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroup.instance)));
+
+    public static final RegistryObject<Item> PINK_CHESTPLATE = ITEMS.register("pink_chestplate",
+            () -> new ArmorItem(ModArmorMaterial.PINK, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroup.instance)));
+
+    public static final RegistryObject<Item> PINK_LEGGINGS = ITEMS.register("pink_leggings",
+            () -> new ArmorItem(ModArmorMaterial.PINK, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroup.instance)));
+
+    public static final RegistryObject<Item> PINK_BOOTS = ITEMS.register("pink_boots",
+            () -> new ArmorItem(ModArmorMaterial.PINK, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroup.instance)));
 
     // a new creative tab
     public static class ModItemGroup extends ItemGroup {

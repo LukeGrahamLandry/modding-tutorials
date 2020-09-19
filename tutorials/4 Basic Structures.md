@@ -1,10 +1,6 @@
 ## Description
 
-In this tutorial we make a structure that generates in the world (with a randomly filled chest).
-
-Ask Me Questions: https://discord.gg/VbZVnRd
-The Code: https://github.com/LukeGrahamLandry/forge-modding-tutorial
-Donate: https://www.patreon.com/LukeGrahamLandry
+In this tutorial we make a structure that generates in the world (with a randomly filled chest)
 
 Structure code based on this repository: https://github.com/TelepathicGrunt/StructureTutorialMod
 
