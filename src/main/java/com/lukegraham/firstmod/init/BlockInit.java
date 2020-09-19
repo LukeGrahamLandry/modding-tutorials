@@ -1,6 +1,7 @@
 package com.lukegraham.firstmod.init;
 
 import com.lukegraham.firstmod.FirstMod;
+import com.lukegraham.firstmod.blocks.SadBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
@@ -21,6 +22,8 @@ public class BlockInit {
     public static final RegistryObject<Block> SMILE_BLOCK = BLOCKS.register("smile_block",
             () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1f, 1200f).harvestLevel(2).harvestTool(ToolType.PICKAXE).lightValue(10)));
 
+    public static final RegistryObject<Block> SAD_BLOCK = BLOCKS.register("sad_block",
+            () -> new SadBlock(Block.Properties.from(SMILE_BLOCK.get()).hardnessAndResistance(1f)));
 
     // automaticlly creates items for all blocks
     // you could do it manually instead by registering BlockItems in your ItemInit class

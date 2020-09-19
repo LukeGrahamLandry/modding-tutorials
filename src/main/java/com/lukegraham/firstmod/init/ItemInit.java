@@ -14,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, FirstMod.MOD_ID);
 
+    // a basic item
     public static final RegistryObject<Item> SMILE = ITEMS.register("smile",
             () -> new Item(new Item.Properties().group(ModItemGroup.instance)));
 

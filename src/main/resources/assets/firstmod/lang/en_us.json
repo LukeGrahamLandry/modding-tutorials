@@ -11,5 +11,6 @@
     "item.firstmod.pink_sword": "Pink Sword",
     "item.firstmod.pink_hoe": "Pink Hoe",
 
-    "block.firstmod.smile_block": "Smiley Block"
+    "block.firstmod.smile_block": "Smiley Block",
+    "block.firstmod.sad_block": "Frown Block"
 }
