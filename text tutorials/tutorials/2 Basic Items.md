@@ -1,18 +1,20 @@
-### Intro
+## Intro
+In this tutorial we will make a new item with a name and a texture. We will also make a new creative tab to put items in.
 
-### New Item
+## New Item
 Make a new package (in src/main/java/com/name/modname) called init and in that make a new class
 class called ItemInit. This is where we will register all our items. I recommend doing this with deffered registers. 
 So first we have to get the item register so we can tell the game about our items.
 ```java
-public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, FirstMod.MOD_ID);
+public static final DeferredRegister<Item> ITEMS = 
+            new DeferredRegister<>(ForgeRegistries.ITEMS, FirstMod.MOD_ID);
 ```
 Make sure you import all the classes you need. In intellij unimported classes will be written in red and you can 
 press option enter on them to import them. Important to import the version of Item from net.minecraft.  
   
 Then you can register your first item. It's going to be both static and final, the convention is to name it in all uppercase. 
 Call the register function and the first argument is the name which must be all lowercase (this can be used to give it to yourself 
-in game with /give Dev modid:item_name) and the second is a supplier for a new Item which takes in a new Item.Properties.  
+in game with /give Dev modid:item_name) and the second is a supplier for a new Item which takes in a new Item.Properties. Later, if you want to access the item from your code you can do ItemInit.ITEM_NAME.get()  
 
 ```java
 public static final RegistryObject<Item> SMILE = ITEMS.register("smile",
@@ -74,10 +76,10 @@ In the layer0 item, make sure to change firstmod to your modid and smile to the 
 
 ```json
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "firstmod:items/smile"
-  }
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "firstmod:items/smile"
+    }
 } 
 ```
 
@@ -85,17 +87,17 @@ Your file structure should look like this:
 
 ```
 src/main
-    - resources/assets/modid
-        - lang
+    - resources/assets/modid/
+        - lang/
             - en_us.json
-        - models
+        - models/
             - item_name.json
-        - textures
-            - items
+        - textures/
+            - items/
                 - item_name.png
-    - java/com/name/modname
+    - java/com/name/modname/
         - ModName.java
-        - init
+        - init/
             - ItemInit.java
 ```
 
