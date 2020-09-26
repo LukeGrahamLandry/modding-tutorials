@@ -54,11 +54,27 @@ creative tab, just use ItemGroup.whatever (your IDE should let you auto fill it)
 new Item.Properties().group(ModItemGroup.instance)
 ```
 
+## Main Class
+
+In the constructor of your main class call the register method of your DefferedRegister. So that constructer 
+should look something like this.
+
+```java
+public FirstMod() {
+    final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+    modEventBus.addListener(this::setup);
+    ItemInit.ITEMS.register(modEventBus);
+    
+    MinecraftForge.EVENT_BUS.register(this);
+}
+```
+
 ## Assets
 
 In your project folder go to src/main/resources and make a new folder called assets, in that make one called your modid 
 and in that ones called lang, models, and textures. In the textures folder make a folder called items and
-in that put a png image to use for your item in game.  
+in that put a png image to use for your item in game. In the models folder make a folder called item.
 
 In the assets folder make a new file called en_us.json This is where we tell it how to display the names for our item 
 and item group in game. Make sure to change firstmod to your modid and smile to your item name. 
@@ -71,7 +87,7 @@ and item group in game. Make sure to change firstmod to your modid and smile to 
 } 
 ```
 
-Then in the models folder make a file called item_name.json (call it whatever string you passed into the Item constructer). 
+Then in models/item make a file called item_name.json (call it whatever string you passed into the Item constructer). 
 In the layer0 item, make sure to change firstmod to your modid and smile to the name of the image file you want to use. 
 
 ```json
