@@ -49,6 +49,12 @@
                     </div> <br> <br>
             </div>
         </div>
+
+        <div id="ads">
+            &rarr; <button onclick="closeAd()"> close ad </button> &larr; <br>
+            <iframe data-aa="1478145" src="//ad.a-ads.com/1478145?size=250x250&background_color=212121" scrolling="no" style="width:250px; height:250px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>
+            <br> Untrusted! Use at own risk!
+        </div>
         
         
         <style>
@@ -94,9 +100,24 @@
                 visibility: visible;
             }
         
+            #ads {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                background-color: #202020;
+                color: whitesmoke;
+                text-align: center;
+                border: 2px solid black;
+                border-radius: 10px;
+            }
         </style>
         
         <script>
+
+            function closeAd(){
+                document.getElementById("ads").style.display = "none";
+            }
+
             function httpGet(url){
                 let xmlHttp = new XMLHttpRequest();
                 xmlHttp.open("GET", url, false); // synchronous

@@ -3,6 +3,7 @@ package com.lukegraham.firstmod.init;
 import com.lukegraham.firstmod.FirstMod;
 import com.lukegraham.firstmod.items.FuelItem;
 import com.lukegraham.firstmod.items.TeleportStaff;
+import com.lukegraham.firstmod.items.TorchBow;
 import com.lukegraham.firstmod.util.ModArmorMaterial;
 import com.lukegraham.firstmod.util.ModItemTier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -62,6 +63,10 @@ public class ItemInit {
 
     public static final RegistryObject<Item> PINK_BOOTS = ITEMS.register("pink_boots",
             () -> new ArmorItem(ModArmorMaterial.PINK, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroup.instance)));
+
+    // torch bow
+    public static final RegistryObject<Item> TORCH_BOW = ITEMS.register("torch_bow",
+            () -> new TorchBow(new Item.Properties().group(ModItemGroup.instance)));
 
     // a new creative tab
     public static class ModItemGroup extends ItemGroup {
