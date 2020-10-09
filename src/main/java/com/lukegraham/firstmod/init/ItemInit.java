@@ -66,7 +66,7 @@ public class ItemInit {
 
     // torch bow
     public static final RegistryObject<Item> TORCH_BOW = ITEMS.register("torch_bow",
-            () -> new TorchBow(new Item.Properties().group(ModItemGroup.instance)));
+            () -> new TorchBow(new Item.Properties().group(ModItemGroup.instance).maxDamage(500)));
 
     // a new creative tab
     public static class ModItemGroup extends ItemGroup {

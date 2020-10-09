@@ -49,7 +49,7 @@ public class FeatureInit
          * It is always a good idea to register your regular features too so that other mods
          * can use them too directly from the Forge Registry. It great for mod compatibility.
          */
-        HOUSE.setRegistryName(new ResourceLocation(FirstMod.MOD_ID, "house"));
+        HOUSE.setRegistryName(new ResourceLocation(FirstMod.MOD_ID, "house"));  // the string here must be the same as in HouseStructure.getStructureName
         registry.register(HOUSE);
         Registry.register(Registry.STRUCTURE_PIECE, "house", HOUSE_PIECE);
 

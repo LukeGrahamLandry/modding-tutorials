@@ -20,7 +20,7 @@ Then build your structure. You can include chests and they will save thier conte
 above a chest, right click it and set the mode to data and set a descriptive tag (like "chest") and we can set the 
 contents from code later.  
 
-Put a structure in one corner of your structure. Set it to corner mode and give it a name. Then put one in the opposite 
+Put a structure block in one corner of your structure. Set it to corner mode and give it a name. Then put one in the opposite 
 corner, put it on save mode and name it the same thing. Click detect to show the outline in the world and make sure 
 it covers your entire structure. Then go back to the structure block, click save and exit the world.  
 

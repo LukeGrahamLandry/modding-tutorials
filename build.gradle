@@ -109,6 +109,12 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.15.2-1.2-32.168")  // for patchouli (guide book mod)
+    // So when you run in Dev mode it has your book. Players will have to have the patchouli jar as well the one for your mod
+}
+
+repositories {
+    maven { url 'https://maven.blamejared.com' }  // for patchouli (guide book mod)
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

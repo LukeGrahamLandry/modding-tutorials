@@ -40,7 +40,7 @@ Big words say what mod do!
 '''
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
+[[dependencies.firstmod]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -52,9 +52,15 @@ Big words say what mod do!
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.examplemod]]
+[[dependencies.firstmod]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.firstmod]]
+    modId="patchouli"
+    mandatory=false
+    versionRange="[1.15.2-1.2-32,]"
     ordering="NONE"
     side="BOTH"
