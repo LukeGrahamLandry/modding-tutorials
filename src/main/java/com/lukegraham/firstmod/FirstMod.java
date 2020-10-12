@@ -3,6 +3,7 @@ package com.lukegraham.firstmod;
 import com.lukegraham.firstmod.init.BlockInit;
 import com.lukegraham.firstmod.init.FeatureInit;
 import com.lukegraham.firstmod.init.ItemInit;
+import com.lukegraham.firstmod.init.PotionInit;
 import com.lukegraham.firstmod.world.gen.OreGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -45,8 +46,10 @@ public class FirstMod
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::doClientStuff);
 
-        ItemInit.ITEMS.register(modEventBus);    // registers your items
-        BlockInit.BLOCKS.register(modEventBus);  // registers your blocks
+        ItemInit.ITEMS.register(modEventBus);     // registers your items
+        BlockInit.BLOCKS.register(modEventBus);   // registers your blocks
+        PotionInit.EFFECTS.register(modEventBus);
+        PotionInit.POTIONS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -55,6 +58,7 @@ public class FirstMod
     private void setup(final FMLCommonSetupEvent event) {
         FeatureInit.addToBiomes();  // makes structures spawn
         OreGen.addOresToBiomes();   // makes ores generate
+        PotionInit.addPotionRecipes();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {}
