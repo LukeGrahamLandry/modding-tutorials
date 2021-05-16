@@ -4,5 +4,7 @@
   "item.firstmod.smile": "Smiley Face",
   "item.firstmod.teleport_staff": "Epic Staff of Teleportation",
   "item.firstmod.fruit": "Cherry",
-  "item.firstmod.fuel": "Fancy Blue Coal"
+  "item.firstmod.fuel": "Fancy Blue Coal",
+
+  "block.firstmod.smile_block": "Smiley Block"
 }

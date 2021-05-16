@@ -1,5 +1,6 @@
 package ca.lukegrahamlandry.firstmod;
 
+import ca.lukegrahamlandry.firstmod.init.BlockInit;
 import ca.lukegrahamlandry.firstmod.init.ItemInit;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,6 +21,7 @@ public class FirstModMain {
 
         modEventBus.addListener(this::setup);
         ItemInit.ITEMS.register(modEventBus);
+        BlockInit.BLOCKS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
