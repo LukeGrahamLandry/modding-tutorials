@@ -1,7 +1,9 @@
 package ca.lukegrahamlandry.firstmod.init;
 
 import ca.lukegrahamlandry.firstmod.FirstModMain;
+import ca.lukegrahamlandry.firstmod.blocks.SadBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -20,6 +22,9 @@ public class BlockInit {
 
     public static final RegistryObject<Block> SMILE_BLOCK = BLOCKS.register("smile_block",
             () -> new Block(Block.Properties.of(Material.STONE).strength(4f, 1200f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().lightLevel((state) -> 15)));
+
+    public static final RegistryObject<Block> SAD_BLOCK = BLOCKS.register("sad_block",
+            () -> new SadBlock(Block.Properties.copy(Blocks.DIRT)));
 
 
     // automatically creates items for all your blocks
