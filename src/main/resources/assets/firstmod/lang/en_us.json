@@ -5,6 +5,16 @@
   "item.firstmod.teleport_staff": "Epic Staff of Teleportation",
   "item.firstmod.fruit": "Cherry",
   "item.firstmod.fuel": "Fancy Blue Coal",
+  "item.firstmod.pink_pickaxe": "Pink Pickaxe",
+  "item.firstmod.pink_axe": "Pink Axe",
+  "item.firstmod.pink_shovel": "Pink Shovel",
+  "item.firstmod.pink_sword": "Pink Sword",
+  "item.firstmod.pink_hoe": "Pink Hoe",
+  "item.firstmod.pink_helmet": "Pink Helmet",
+  "item.firstmod.pink_chestplate": "Pink Chestplate",
+  "item.firstmod.pink_leggings": "Pink Leggings",
+  "item.firstmod.pink_boots": "Pink Boots",
+  "item.firstmod.flaming_chestplate": "Flaming Chestplate",
 
   "block.firstmod.smile_block": "Smiley Block"
 }
