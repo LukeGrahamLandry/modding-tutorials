@@ -2,6 +2,8 @@ package ca.lukegrahamlandry.firstmod;
 
 import ca.lukegrahamlandry.firstmod.init.BlockInit;
 import ca.lukegrahamlandry.firstmod.init.ItemInit;
+import ca.lukegrahamlandry.firstmod.init.TileEntityInit;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +24,7 @@ public class FirstModMain {
         modEventBus.addListener(this::setup);
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
+        TileEntityInit.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

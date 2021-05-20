@@ -2,6 +2,7 @@ package ca.lukegrahamlandry.firstmod.init;
 
 import ca.lukegrahamlandry.firstmod.FirstModMain;
 import ca.lukegrahamlandry.firstmod.blocks.SadBlock;
+import ca.lukegrahamlandry.firstmod.blocks.MobSlayerBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -25,6 +26,9 @@ public class BlockInit {
 
     public static final RegistryObject<Block> SAD_BLOCK = BLOCKS.register("sad_block",
             () -> new SadBlock(Block.Properties.copy(Blocks.DIRT)));
+
+    public static final RegistryObject<Block> MOB_SLAYER = BLOCKS.register("mob_slayer",
+            () -> new MobSlayerBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
 
 
     // automatically creates items for all your blocks

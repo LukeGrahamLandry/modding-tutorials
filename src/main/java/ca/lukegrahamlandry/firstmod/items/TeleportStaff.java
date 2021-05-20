@@ -10,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -39,6 +41,9 @@ public class TeleportStaff extends Item {
 
         // allow the teleport to cancel fall damage
         player.fallDistance = 0F;
+
+        // play a teleport sound. the last two args are volume and pitch
+        world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
         // reduce durability
         ItemStack stack = player.getItemInHand(hand);
