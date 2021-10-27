@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:wooden_axe"
+  },
+  "addition": {
+    "item": "minecraft:cobblestone"
+  },
+  "result": {
+    "item": "minecraft:stone_axe"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "firstmod:smile_block"
+  },
+  "result": "minecraft:stone_stairs",
+  "count": 2
+}

@@ -1,5 +1,6 @@
 package ca.lukegrahamlandry.firstmod;
 
+import ca.lukegrahamlandry.firstmod.events.AnvilHandler;
 import ca.lukegrahamlandry.firstmod.init.BlockInit;
 import ca.lukegrahamlandry.firstmod.init.EnchantmentInit;
 import ca.lukegrahamlandry.firstmod.init.ItemInit;
@@ -33,5 +34,6 @@ public class FirstModMain {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        AnvilHandler.initAnvilRecipes();
     }
 }

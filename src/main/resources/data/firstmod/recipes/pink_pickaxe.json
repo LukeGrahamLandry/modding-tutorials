@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " / ",
+    " / "
+  ],
+  "key": {
+    "#": {
+      "item": "firstmod:smile"
+    },
+    "/": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "firstmod:pink_pickaxe"
+  }
+}
