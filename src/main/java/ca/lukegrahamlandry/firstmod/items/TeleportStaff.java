@@ -80,4 +80,11 @@ public class TeleportStaff extends Item {
         Vector3d vector3d1 = vector3d.add((double)f6 * range, (double)f5 * range, (double)f7 * range);
         return world.clip(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
     }
+
+
+    // makes the item enchantable. done in enchants tutorial
+    @Override
+    public int getEnchantmentValue() {
+        return 10;
+    }
 }

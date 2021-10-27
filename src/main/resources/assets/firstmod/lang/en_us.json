@@ -18,5 +18,7 @@
 
   "block.firstmod.smile_block": "Smiley Block",
   "block.firstmod.sad_block": "Sad Block",
-  "block.firstmod.mob_slayer": "Mob Slayer"
+  "block.firstmod.mob_slayer": "Mob Slayer",
+
+  "enchantment.firstmod.bridge": "Bridging"
 }
