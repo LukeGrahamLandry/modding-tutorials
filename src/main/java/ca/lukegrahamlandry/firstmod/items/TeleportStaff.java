@@ -1,5 +1,6 @@
 package ca.lukegrahamlandry.firstmod.items;
 
+import ca.lukegrahamlandry.firstmod.init.ItemInit;
 import ca.lukegrahamlandry.firstmod.util.KeyboardHelper;
 import com.sun.javafx.geom.Vec3d;
 import net.minecraft.client.Minecraft;
@@ -81,10 +82,21 @@ public class TeleportStaff extends Item {
         return world.clip(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
     }
 
-
     // makes the item enchantable. done in enchants tutorial
     @Override
     public int getEnchantmentValue() {
         return 10;
+    }
+
+    // makes it repairable
+
+    @Override
+    public boolean isRepairable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack tool, ItemStack material) {
+        return material.getItem() == ItemInit.SMILE.get();
     }
 }
