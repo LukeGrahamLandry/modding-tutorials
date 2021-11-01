@@ -2,25 +2,22 @@ package ca.lukegrahamlandry.firstmod.items;
 
 import ca.lukegrahamlandry.firstmod.init.ItemInit;
 import ca.lukegrahamlandry.firstmod.util.KeyboardHelper;
-import com.sun.javafx.geom.Vec3d;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -31,9 +28,9 @@ public class TeleportStaff extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         // get where the player is looking and move them there
-        BlockRayTraceResult ray = rayTrace(world, player, RayTraceContext.FluidMode.NONE);
+        BlockHitResult ray = rayTrace(world, player, ClipContext.Fluid.NONE);
         BlockPos lookPos = ray.getBlockPos().relative(ray.getDirection());
         player.setPos(lookPos.getX(), lookPos.getY(), lookPos.getZ());
 
@@ -44,7 +41,7 @@ public class TeleportStaff extends Item {
         player.fallDistance = 0F;
 
         // play a teleport sound. the last two args are volume and pitch
-        world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
 
         // reduce durability
         ItemStack stack = player.getItemInHand(hand);
@@ -57,29 +54,29 @@ public class TeleportStaff extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         if (KeyboardHelper.isHoldingShift()){
-            tooltip.add(new StringTextComponent("teleports you where you're looking"));
+            tooltip.add(new TextComponent("teleports you where you're looking"));
         }
 
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
 
-    protected static BlockRayTraceResult rayTrace(World world, PlayerEntity player, RayTraceContext.FluidMode fluidMode) {
+    protected static BlockHitResult rayTrace(Level world, Player player, ClipContext.Fluid fluidMode) {
         double range = 15;
 
-        float f = player.xRot;
-        float f1 = player.yRot;
-        Vector3d vector3d = player.getEyePosition(1.0F);
-        float f2 = MathHelper.cos(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
-        float f3 = MathHelper.sin(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
-        float f4 = -MathHelper.cos(-f * ((float)Math.PI / 180F));
-        float f5 = MathHelper.sin(-f * ((float)Math.PI / 180F));
+        float f = player.getXRot();
+        float f1 = player.getYRot();
+        Vec3 vector3d = player.getEyePosition(1.0F);
+        float f2 = Mth.cos(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
+        float f3 = Mth.sin(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
+        float f4 = -Mth.cos(-f * ((float)Math.PI / 180F));
+        float f5 = Mth.sin(-f * ((float)Math.PI / 180F));
         float f6 = f3 * f4;
         float f7 = f2 * f4;
-        Vector3d vector3d1 = vector3d.add((double)f6 * range, (double)f5 * range, (double)f7 * range);
-        return world.clip(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
+        Vec3 vector3d1 = vector3d.add((double)f6 * range, (double)f5 * range, (double)f7 * range);
+        return world.clip(new ClipContext(vector3d, vector3d1, ClipContext.Block.OUTLINE, fluidMode, player));
     }
 
     // makes the item enchantable. done in enchants tutorial

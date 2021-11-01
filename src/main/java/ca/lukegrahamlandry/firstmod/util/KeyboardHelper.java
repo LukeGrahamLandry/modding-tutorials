@@ -1,7 +1,7 @@
 package ca.lukegrahamlandry.firstmod.util;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.InputMappings;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
@@ -11,16 +11,16 @@ public class KeyboardHelper {
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isHoldingShift() {
-        return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_SHIFT) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_SHIFT);
+        return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_SHIFT) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_SHIFT);
     }
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isHoldingControl() {
-        return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
+        return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
     }
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isHoldingSpace() {
-        return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_SPACE);
+        return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_SPACE);
     }
 }

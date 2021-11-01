@@ -1,33 +1,32 @@
 package ca.lukegrahamlandry.firstmod.items;
 
 import ca.lukegrahamlandry.firstmod.util.IDamageHandlingArmor;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class FlamingArmorItem extends ArmorItem implements IDamageHandlingArmor {
-    public FlamingArmorItem(IArmorMaterial material, EquipmentSlotType slot, Properties properties) {
+    public FlamingArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
         super(material, slot, properties);
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
         if (!world.isClientSide()){
-            player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 200));
+            player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200));
         }
     }
 
     @Override
-    public float onDamaged(LivingEntity entity, EquipmentSlotType slot, DamageSource source, float amount) {
+    public float onDamaged(LivingEntity entity, EquipmentSlot slot, DamageSource source, float amount) {
         Entity attacker = source.getEntity();
         if (attacker instanceof LivingEntity){
             attacker.hurt(DamageSource.ON_FIRE, amount / 2);

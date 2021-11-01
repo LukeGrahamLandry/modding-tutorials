@@ -1,16 +1,14 @@
 package ca.lukegrahamlandry.firstmod.enchants;
 
-import ca.lukegrahamlandry.firstmod.FirstModMain;
 import ca.lukegrahamlandry.firstmod.init.ItemInit;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-// doesnt actually do anything but can be applied to our own custom item
 public class DistanceEnchantment extends Enchantment {
-    static EnchantmentType TELEPORT_STAFF_TYPE = EnchantmentType.create("teleport_staff", item -> item == ItemInit.TELEPORT_STAFF.get());
+    static EnchantmentCategory TELEPORT_STAFF_TYPE = EnchantmentCategory.create("teleport_staff", item -> item == ItemInit.TELEPORT_STAFF.get());
 
     public DistanceEnchantment() {
-        super(Rarity.COMMON, TELEPORT_STAFF_TYPE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND});
+        super(Rarity.COMMON, TELEPORT_STAFF_TYPE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 }

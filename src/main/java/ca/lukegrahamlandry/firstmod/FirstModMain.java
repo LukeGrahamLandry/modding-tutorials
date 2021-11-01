@@ -5,7 +5,6 @@ import ca.lukegrahamlandry.firstmod.init.BlockInit;
 import ca.lukegrahamlandry.firstmod.init.EnchantmentInit;
 import ca.lukegrahamlandry.firstmod.init.ItemInit;
 import ca.lukegrahamlandry.firstmod.init.TileEntityInit;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;

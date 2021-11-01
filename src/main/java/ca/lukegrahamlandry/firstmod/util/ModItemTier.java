@@ -1,13 +1,13 @@
 package ca.lukegrahamlandry.firstmod.util;
 
 import ca.lukegrahamlandry.firstmod.init.ItemInit;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.util.LazyLoadedValue;
 
 import java.util.function.Supplier;
 
-public enum ModItemTier implements IItemTier {
+public enum ModItemTier implements Tier {
     PINK(3, 3000, 10.0F, 5.0F, 5, () -> {
         return Ingredient.of(ItemInit.SMILE.get());
     });
@@ -17,7 +17,7 @@ public enum ModItemTier implements IItemTier {
     private final float speed;
     private final float damage;
     private final int enchantmentValue;
-    private final LazyValue<Ingredient> repairIngredient;
+    private final LazyLoadedValue<Ingredient> repairIngredient;
 
     ModItemTier(int level, int durability, float miningSpeed, float damage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.level = level;
@@ -25,7 +25,7 @@ public enum ModItemTier implements IItemTier {
         this.speed = miningSpeed;
         this.damage = damage;
         this.enchantmentValue = enchantability;
-        this.repairIngredient = new LazyValue<>(repairIngredient);
+        this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
     }
 
     public int getUses() {

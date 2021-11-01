@@ -1,0 +1,268 @@
+// a script that updates your code from MCP class names to Mojang class names
+// License: Creative Commons Zero v1.0 Universal
+// by SizableShrimp from https://github.com/SizableShrimp/Forge-Class-Remapper on Nov 1 2021
+
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
+        classpath 'com.google.code.gson:gson:2.8.7'
+    }
+}
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net' }
+    mavenCentral()
+}
+
+
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import net.minecraftforge.gradle.common.tasks.ApplyRangeMap
+import net.minecraftforge.gradle.common.tasks.ExtractExistingFiles
+import net.minecraftforge.gradle.common.tasks.ExtractRangeMap
+import net.minecraftforge.gradle.common.util.MinecraftRepo
+import net.minecraftforge.srgutils.IMappingBuilder
+import net.minecraftforge.srgutils.IMappingFile
+import net.minecraftforge.srgutils.IRenamer
+
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.URL
+
+def doingUpdate = hasProperty('UPDATE_CLASSNAMES')
+def isReversed = hasProperty('REVERSED')
+
+if (doingUpdate) {
+    afterEvaluate { project ->
+        def javaCompile = project.tasks.getByName('compileJava') as JavaCompile
+        def sourceSets = project.sourceSets
+        Set<File> srcDirs = new HashSet<>()
+        (project.findProperty('UPDATE_SOURCESETS') ?: 'main').toString().split(';').each {
+            srcDirs.addAll(sourceSets.getByName(it).java.srcDirs)
+        }
+
+        if (srcDirs.empty)
+            throw new RuntimeException("No java source directories found to update!")
+
+        task extractRangeMap(type: ExtractRangeMap) {
+            sources.from srcDirs
+            dependencies.from javaCompile.getClasspath()
+        }
+
+        task chainClassnames(type: CreateChainedClassnames) {
+            def version = project.getExtensions().getExtraProperties().get('MC_VERSION') as String
+            if (!version) throw new IllegalStateException('The minecraft version could not be found!')
+            version = version.substring(version.lastIndexOf('-') + 1)
+            mcVersion = version
+            reversed = isReversed
+            input = tasks.extractSrg.output
+        }
+
+        task applyRangeMap(type: ApplyRangeMap) {
+            rangeMap = tasks.extractRangeMap.output
+            srgFiles.from chainClassnames.output //, tasks.createMcpToSrg.output
+            sources.from srcDirs
+        }
+
+        task extractMappedNew(type: ExtractExistingFiles) {
+            archive = tasks.applyRangeMap.output
+            targets.from srcDirs
+        }
+
+        task chainOldToNewSrg(type: ChainOldToNewSrg) {
+            dependsOn(chainClassnames)
+            reversed = isReversed
+            renamer = chainClassnames.output.map {
+                def mappings = IMappingFile.load(it.asFile)
+                if (isReversed) mappings = mappings.reverse()
+                return new IRenamer() {
+                    @Override
+                    String rename(IMappingFile.IClass value) {
+                        return mappings.remapClass(value.getOriginal())
+                    }
+                }
+            }
+        }
+
+        task updateAts(type: UpdateATs) {
+            if (minecraft) accessTransformers.from minecraft.accessTransformers
+            mappings = chainOldToNewSrg.output
+        }
+
+        task updateClassnames {
+            dependsOn(extractMappedNew, updateAts)
+        }
+
+        defaultTasks 'updateClassnames'
+    }
+}
+
+abstract class CreateChainedClassnames extends DefaultTask {
+    private static final String MANIFEST_URL = "https://launchermeta.mojang.com/mc/game/version_manifest.json"
+    private static final Gson GSON = new GsonBuilder().create()
+    @Input abstract Property<String> getMcVersion()
+    @InputFile abstract RegularFileProperty getInput()
+    @OutputFile abstract RegularFileProperty getOutput()
+    @Input @Optional abstract Property<Boolean> getReversed()
+
+    CreateChainedClassnames() {
+        output.convention(project.layout.buildDirectory.dir(name).map { d -> d.file('chainedmappings.tsrg') })
+    }
+
+    @TaskAction
+    void doTask() {
+        def mojToObf = IMappingFile.load(mojmaps)
+        def obfToSrg = IMappingFile.load(input.get().asFile)
+
+        def mojToSrg = mojToObf.chain(obfToSrg)
+
+        def builder = IMappingBuilder.create()
+        mojToSrg.getClasses().each {builder.addClass(it.mapped, it.original) }
+        def built = builder.build().getMap('left', 'right')
+        built.write(output.get().asFile.toPath(), IMappingFile.Format.TSRG2, reversed.getOrElse(false))
+    }
+
+    @Internal
+    InputStream getMojmaps() {
+        def manIn = new URL(MANIFEST_URL).openStream()
+        try {
+            def url = GSON.fromJson(new InputStreamReader(manIn), ManifestJson.class).getUrl(mcVersion.get())
+
+            def verIn = url.openStream()
+            try {
+                def json = GSON.fromJson(new InputStreamReader(verIn), VersionJson.class)
+
+                def download = json.downloads.get("client_mappings")
+
+                return download.url.openStream()
+            } finally {
+                verIn.close()
+            }
+        } finally {
+            manIn.close()
+        }
+    }
+}
+
+abstract class ChainOldToNewSrg extends DefaultTask {
+    private static final NEW_SRG = 'https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.16.5-20210303.130956/mcp_config-1.16.5-20210303.130956.zip'
+    private static final OLD_SRG = 'https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.16.5-20210115.111550/mcp_config-1.16.5-20210115.111550.zip'
+    @OutputFile abstract RegularFileProperty getOutput()
+    @Input @Optional abstract Property<Boolean> getReversed()
+    @Internal abstract Property<IRenamer> getRenamer()
+
+    ChainOldToNewSrg() {
+        output.convention(project.layout.buildDirectory.dir(name).map { d -> d.file('chained.tsrg') })
+    }
+
+    @TaskAction
+    void doTask() {
+        def newSrg = getJoinedSrg(NEW_SRG)
+        def oldSrg = getJoinedSrg(OLD_SRG)
+        def chained = oldSrg.reverse().chain(newSrg)
+        def renamer = renamer.getOrNull()
+        if (renamer) chained = chained.rename(renamer)
+
+        chained.write(output.get().asFile.toPath(), IMappingFile.Format.TSRG2, reversed.getOrElse(false))
+    }
+
+    static getJoinedSrg(url) {
+        def baos = new ByteArrayOutputStream()
+        def zis = new ZipInputStream(new URL(url).openStream())
+        try {
+            ZipEntry entry
+            while ((entry = zis.getNextEntry()) != null) {
+                if (entry.name != 'config/joined.tsrg') continue
+                def buf = new byte[1024]
+                int length
+                while ((length = zis.read(buf)) > 0) {
+                    baos.write(buf, 0, length)
+                }
+            }
+            return IMappingFile.load(new ByteArrayInputStream(baos.toByteArray()))
+        } finally {
+            baos.close()
+            zis.close()
+        }
+    }
+}
+
+abstract class UpdateATs extends DefaultTask {
+    @InputFile abstract RegularFileProperty getMappings()
+    @InputFiles abstract ConfigurableFileCollection getAccessTransformers()
+
+    @TaskAction
+    void doTask() {
+        def mappings = IMappingFile.load(mappings.get().asFile)
+
+        for (def file : accessTransformers.getFiles()) {
+            if (!file.exists()) continue
+            def text = file.text
+            def crlf = text.contains('\r')
+            def lines = text.split('\r?\n')
+            def newLines = lines.collect { line ->
+                def original = line
+                if (!line) return original
+                def idx = line.indexOf('#')
+                def comment = idx == -1 ? null : line.substring(idx)
+                line = idx == -1 ? line : line.substring(0, idx)
+                if (!line) return original
+                def split = line.split(' ')
+                if (split.length < 2) return original
+                def cls = mappings.getClass(split[1].replace('.', '/'))
+                if (cls) split[1] = cls.getMapped().replace('/', '.')
+                if (cls && split.length >= 3) {
+                    def entry = split[2]
+                    idx = entry.indexOf('(')
+                    if (idx == -1) {
+                        split[2] = cls.remapField(entry)
+                    } else {
+                        def mtdName = entry.substring(0, idx)
+                        def desc = entry.substring(idx)
+                        def newMethod = cls.getMethod(mtdName, desc)
+                        split[2] = newMethod ? newMethod.mapped + newMethod.mappedDescriptor : entry
+                    }
+                }
+                return String.join(' ', split) + (comment ? ' ' + comment : '')
+            }
+            file.text = String.join(crlf ? '\r\n' : '\n', newLines)
+        }
+    }
+}
+
+class ManifestJson {
+    VersionInfo[] versions
+
+    static class VersionInfo {
+        String id
+        URL url
+    }
+
+    URL getUrl(String version) {
+        if (version == null) {
+            return null
+        }
+        for (VersionInfo info : versions) {
+            if (version == info.id) {
+                return info.url
+            }
+        }
+        return null
+    }
+}
+
+class VersionJson {
+    Map<String, Download> downloads
+
+    static class Download {
+        String sha1
+        int size
+        URL url
+    }
+}

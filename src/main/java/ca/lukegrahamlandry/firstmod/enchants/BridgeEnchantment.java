@@ -1,32 +1,24 @@
 package ca.lukegrahamlandry.firstmod.enchants;
 
 import ca.lukegrahamlandry.firstmod.init.EnchantmentInit;
-import ca.lukegrahamlandry.firstmod.util.IDamageHandlingArmor;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Map;
-import java.util.Random;
-
 public class BridgeEnchantment extends Enchantment {
     public BridgeEnchantment() {
-        super(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[]{EquipmentSlotType.FEET});
+        super(Enchantment.Rarity.RARE, EnchantmentCategory.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
     }
 
     @Override
@@ -48,7 +40,7 @@ public class BridgeEnchantment extends Enchantment {
     // called when you get attacked by something
     @Override
     public void doPostHurt(LivingEntity target, Entity attacker, int p_151367_3_) {
-        target.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 100));
+        target.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100));
     }
 
 

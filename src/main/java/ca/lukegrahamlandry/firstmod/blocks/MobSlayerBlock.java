@@ -2,52 +2,61 @@ package ca.lukegrahamlandry.firstmod.blocks;
 
 import ca.lukegrahamlandry.firstmod.init.TileEntityInit;
 import ca.lukegrahamlandry.firstmod.tiles.MobSlayerTile;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
-public class MobSlayerBlock extends Block {
-    public MobSlayerBlock(AbstractBlock.Properties props) {
+import javax.annotation.Nullable;
+
+public class MobSlayerBlock extends Block implements EntityBlock {
+    public MobSlayerBlock(BlockBehaviour.Properties props) {
         super(props);
     }
 
+    @Nullable
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return TileEntityInit.MOB_SLAYER.get().create(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, TileEntityInit.MOB_SLAYER.get(), MobSlayerTile::tick);
+    }
+
+    @Nullable
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> type, BlockEntityType<E> correctType, BlockEntityTicker<? super E> ticker) {
+        return correctType == type ? (BlockEntityTicker<A>)ticker : null;
     }
 
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityInit.MOB_SLAYER.get().create();
-    }
-
-    @Override
-    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        if (!world.isClientSide() && hand == Hand.MAIN_HAND){
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!world.isClientSide() && hand == InteractionHand.MAIN_HAND){
             // get the tile entity at that position and make sure that it's the right type
-            TileEntity tile = world.getBlockEntity(pos);
+            BlockEntity tile = world.getBlockEntity(pos);
             if (tile instanceof MobSlayerTile){
                 // toggle whether the slayer is active
                 ((MobSlayerTile) tile).toggle();
 
                 // play an aggressive sound so I can tell the click was processed
-                world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_LAND, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                return ActionResultType.SUCCESS;
+                world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 1.0F, 1.0F);
+                return InteractionResult.SUCCESS;
             }
         }
 
         return super.use(state, world, pos, player, hand, hit);
     }
-
 }
