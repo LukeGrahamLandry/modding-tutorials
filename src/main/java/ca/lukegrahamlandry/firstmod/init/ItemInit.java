@@ -1,6 +1,7 @@
 package ca.lukegrahamlandry.firstmod.init;
 
 import ca.lukegrahamlandry.firstmod.FirstModMain;
+import ca.lukegrahamlandry.firstmod.items.ExplosiveArrowItem;
 import ca.lukegrahamlandry.firstmod.items.FlamingArmorItem;
 import ca.lukegrahamlandry.firstmod.items.FuelItem;
 import ca.lukegrahamlandry.firstmod.items.TeleportStaff;
@@ -74,6 +75,10 @@ public class ItemInit {
     // special armor
     public static final RegistryObject<Item> FLAMING_CHESTPLATE = ITEMS.register("flaming_chestplate",
             () -> new FlamingArmorItem(ModArmorMaterial.PINK, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTab.instance)));
+
+    // custom arrow
+    public static final RegistryObject<Item> EXPLOSIVE_ARROW = ITEMS.register("explosive_arrow",
+            () -> new ExplosiveArrowItem(new Item.Properties().tab(ModCreativeTab.instance)));
 
 
     public static class ModCreativeTab extends CreativeModeTab {
