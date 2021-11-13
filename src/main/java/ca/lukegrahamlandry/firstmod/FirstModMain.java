@@ -1,10 +1,7 @@
 package ca.lukegrahamlandry.firstmod;
 
 import ca.lukegrahamlandry.firstmod.events.AnvilHandler;
-import ca.lukegrahamlandry.firstmod.init.BlockInit;
-import ca.lukegrahamlandry.firstmod.init.EnchantmentInit;
-import ca.lukegrahamlandry.firstmod.init.ItemInit;
-import ca.lukegrahamlandry.firstmod.init.TileEntityInit;
+import ca.lukegrahamlandry.firstmod.init.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,6 +25,7 @@ public class FirstModMain {
         BlockInit.BLOCKS.register(modEventBus);
         TileEntityInit.TILE_ENTITY_TYPES.register(modEventBus);
         EnchantmentInit.ENCHANTMENTS.register(modEventBus);
+        EntityInit.ENTITY_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
