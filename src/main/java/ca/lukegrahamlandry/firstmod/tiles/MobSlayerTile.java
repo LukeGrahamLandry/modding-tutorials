@@ -58,9 +58,9 @@ public class MobSlayerTile extends BlockEntity {
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt) {
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.putBoolean("active", this.isActive);
-        return super.save(nbt);
     }
 
     @Override

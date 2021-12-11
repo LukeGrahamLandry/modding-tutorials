@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migrationMap>
+    <name value="FMLLegacy refactorings" />
+    <description value="Updates class references from 1.17 to 1.18" />
+    <entry oldName="net.minecraftforge.internal.BrandingControl" newName="net.minecraftforge.internal.BrandingControl" type="class" />
+    <entry oldName="net.minecraftforge.logging.CrashReportExtender" newName="net.minecraftforge.logging.CrashReportExtender" type="class" />
+    <entry oldName="net.minecraftforge.data.loading.DatagenModLoader" newName="net.minecraftforge.data.loading.DatagenModLoader" type="class" />
+    <entry oldName="net.minecraftforge.common.ForgeMod.FMLWorldPersistenceHook" newName="net.minecraftforge.common.ForgeMod.FMLWorldPersistenceHook" type="class" />
+    <entry oldName="net.minecraftforge.internal.ForgeBindings" newName="net.minecraftforge.internal.ForgeBindings" type="class" />
+    <entry oldName="net.minecraftforge.common.ForgeI18n" newName="net.minecraftforge.common.ForgeI18n" type="class" />
+    <entry oldName="net.minecraftforge.common.ForgeStatesProvider" newName="net.minecraftforge.common.ForgeStatesProvider" type="class" />
+    <entry oldName="net.minecraftforge.common.util.LogicalSidedProvider" newName="net.minecraftforge.common.util.LogicalSidedProvider" type="class" />
+    <entry oldName="net.minecraftforge.common.util.MavenVersionStringHelper" newName="net.minecraftforge.common.util.MavenVersionStringHelper" type="class" />
+    <entry oldName="net.minecraftforge.client.loading.NoVizFallback" newName="net.minecraftforge.client.loading.NoVizFallback" type="class" />
+    <entry oldName="net.minecraftforge.registries.RegistryObject" newName="net.minecraftforge.registries.RegistryObject" type="class" />
+    <entry oldName="net.minecraftforge.common.ForgeStatesProvider.SerialTransition" newName="net.minecraftforge.common.ForgeStatesProvider.SerialTransition" type="class" />
+    <entry oldName="net.minecraftforge.internal.TextComponentMessageFormatHandler" newName="net.minecraftforge.internal.TextComponentMessageFormatHandler" type="class" />
+    <entry oldName="net.minecraftforge.internal.WorldPersistenceHooks" newName="net.minecraftforge.internal.WorldPersistenceHooks" type="class" />
+    <entry oldName="net.minecraftforge.logging.PacketDump" newName="net.minecraftforge.logging.PacketDump" type="class" />
+    <entry oldName="net.minecraftforge.entity.IEntityAdditionalSpawnData" newName="net.minecraftforge.entity.IEntityAdditionalSpawnData" type="class" />
+    <entry oldName="net.minecraftforge.event.RegistryEvent.IdMappingEvent" newName="net.minecraftforge.event.RegistryEvent.IdMappingEvent" type="class" />
+    <entry oldName="net.minecraftforge.network.event.EventNetworkChannel" newName="net.minecraftforge.network.event.EventNetworkChannel" type="class" />
+    <entry oldName="net.minecraftforge.network.simple.IndexedMessageCodec" newName="net.minecraftforge.network.simple.IndexedMessageCodec" type="class" />
+    <entry oldName="net.minecraftforge.network.simple.SimpleChannel" newName="net.minecraftforge.network.simple.SimpleChannel" type="class" />
+    <entry oldName="net.minecraftforge.network.ConfigSync" newName="net.minecraftforge.network.ConfigSync" type="class" />
+    <entry oldName="net.minecraftforge.network.ConnectionType" newName="net.minecraftforge.network.ConnectionType" type="class" />
+    <entry oldName="net.minecraftforge.network.ConnectionData" newName="net.minecraftforge.network.ConnectionData" type="class" />
+    <entry oldName="net.minecraftforge.network.HandshakeHandler" newName="net.minecraftforge.network.HandshakeHandler" type="class" />
+    <entry oldName="net.minecraftforge.network.HandshakeMessages" newName="net.minecraftforge.network.HandshakeMessages" type="class" />
+    <entry oldName="net.minecraftforge.network.MCRegisterPacketHandler" newName="net.minecraftforge.network.MCRegisterPacketHandler" type="class" />
+    <entry oldName="net.minecraftforge.network.LoginWrapper" newName="net.minecraftforge.network.LoginWrapper" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkConstants" newName="net.minecraftforge.network.NetworkConstants" type="class" />
+    <entry oldName="net.minecraftforge.network.ServerStatusPing" newName="net.minecraftforge.network.ServerStatusPing" type="class" />
+    <entry oldName="net.minecraftforge.network.IContainerFactory" newName="net.minecraftforge.network.IContainerFactory" type="class" />
+    <entry oldName="net.minecraftforge.network.ICustomPacket" newName="net.minecraftforge.network.ICustomPacket" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkDirection" newName="net.minecraftforge.network.NetworkDirection" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkEvent" newName="net.minecraftforge.network.NetworkEvent" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkHooks" newName="net.minecraftforge.network.NetworkHooks" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkInitialization" newName="net.minecraftforge.network.NetworkInitialization" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkInstance" newName="net.minecraftforge.network.NetworkInstance" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkRegistry" newName="net.minecraftforge.network.NetworkRegistry" type="class" />
+    <entry oldName="net.minecraftforge.network.NetworkEvent.PacketDispatcher" newName="net.minecraftforge.network.NetworkEvent.PacketDispatcher" type="class" />
+    <entry oldName="net.minecraftforge.network.PacketDistributor" newName="net.minecraftforge.network.PacketDistributor" type="class" />
+    <entry oldName="net.minecraftforge.resource.DelegatingResourcePack" newName="net.minecraftforge.resource.DelegatingResourcePack" type="class" />
+    <entry oldName="net.minecraftforge.resource.ResourcePackLoader" newName="net.minecraftforge.resource.ResourcePackLoader" type="class" />
+    <entry oldName="net.minecraftforge.server.LanguageHook" newName="net.minecraftforge.server.LanguageHook" type="class" />
+    <entry oldName="net.minecraftforge.server.ServerLifecycleHooks" newName="net.minecraftforge.server.ServerLifecycleHooks" type="class" />
+    <entry oldName="net.minecraftforge.server.loading.ServerModLoader" newName="net.minecraftforge.server.loading.ServerModLoader" type="class" />
+    <entry oldName="net.minecraftforge.event.server.ServerAboutToStartEvent" newName="net.minecraftforge.event.server.ServerAboutToStartEvent" type="class" />
+    <entry oldName="net.minecraftforge.event.server.ServerStartedEvent" newName="net.minecraftforge.event.server.ServerStartedEvent" type="class" />
+    <entry oldName="net.minecraftforge.event.server.ServerStartingEvent" newName="net.minecraftforge.event.server.ServerStartingEvent" type="class" />
+    <entry oldName="net.minecraftforge.event.server.ServerStoppedEvent" newName="net.minecraftforge.event.server.ServerStoppedEvent" type="class" />
+    <entry oldName="net.minecraftforge.event.server.ServerStoppingEvent" newName="net.minecraftforge.event.server.ServerStoppingEvent" type="class" />
+    <entry oldName="net.minecraftforge.event.server.ServerLifecycleEvent" newName="net.minecraftforge.event.server.ServerLifecycleEvent" type="class" />
+    <entry oldName="net.minecraftforge.client.gui.LoadingErrorScreen" newName="net.minecraftforge.client.gui.LoadingErrorScreen" type="class" />
+    <entry oldName="net.minecraftforge.client.gui.ModListScreen" newName="net.minecraftforge.client.gui.ModListScreen" type="class" />
+    <entry oldName="net.minecraftforge.client.gui.widget.ExtendedButton" newName="net.minecraftforge.client.gui.widget.ExtendedButton" type="class" />
+    <entry oldName="net.minecraftforge.client.gui.widget.ModListWidget" newName="net.minecraftforge.client.gui.widget.ModListWidget" type="class" />
+    <entry oldName="net.minecraftforge.client.gui.widget.Slider" newName="net.minecraftforge.client.gui.widget.Slider" type="class" />
+    <entry oldName="net.minecraftforge.client.gui.widget.UnicodeGlyphButton" newName="net.minecraftforge.client.gui.widget.UnicodeGlyphButton" type="class" />
+    <entry oldName="net.minecraftforge.client.gui.GuiUtils" newName="net.minecraftforge.client.gui.GuiUtils" type="class" />
+    <entry oldName="net.minecraftforge.client.ClientRegistry" newName="net.minecraftforge.client.ClientRegistry" type="class" />
+    <entry oldName="net.minecraftforge.client.loading.ClientModLoader" newName="net.minecraftforge.client.loading.ClientModLoader" type="class" />
+    <entry oldName="net.minecraftforge.client.ConfigGuiHandler" newName="net.minecraftforge.client.ConfigGuiHandler" type="class" />
+    <entry oldName="net.minecraftforge.client.loading.EarlyLoaderGUI" newName="net.minecraftforge.client.loading.EarlyLoaderGUI" type="class" />
+    <entry oldName="net.minecraftforge.client.ExtendedServerListData" newName="net.minecraftforge.client.ExtendedServerListData" type="class" />
+</migrationMap>
