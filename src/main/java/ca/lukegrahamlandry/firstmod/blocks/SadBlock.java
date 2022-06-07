@@ -3,6 +3,7 @@ package ca.lukegrahamlandry.firstmod.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -88,7 +89,7 @@ public class SadBlock extends Block {
 
     // called when the block gets a random tick (only server side)
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random rand) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource rand) {
         // check if the block above is air
         BlockState above = world.getBlockState(pos.above());
         if (above.isAir()){

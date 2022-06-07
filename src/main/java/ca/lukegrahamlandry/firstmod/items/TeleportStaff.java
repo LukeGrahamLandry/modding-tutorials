@@ -4,7 +4,6 @@ import ca.lukegrahamlandry.firstmod.init.ItemInit;
 import ca.lukegrahamlandry.firstmod.util.KeyboardHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -56,7 +55,7 @@ public class TeleportStaff extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         if (KeyboardHelper.isHoldingShift()){
-            tooltip.add(new TextComponent("teleports you where you're looking"));
+            tooltip.add(Component.literal("teleports you where you're looking"));
         }
 
         super.appendHoverText(stack, worldIn, tooltip, flagIn);

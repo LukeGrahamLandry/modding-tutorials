@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "ca.lukegrahamlandry.firstmod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "firstmod.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "M1FixCocoa"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

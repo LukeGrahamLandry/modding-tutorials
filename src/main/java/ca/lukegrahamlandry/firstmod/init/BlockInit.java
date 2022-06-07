@@ -1,20 +1,21 @@
 package ca.lukegrahamlandry.firstmod.init;
 
 import ca.lukegrahamlandry.firstmod.FirstModMain;
-import ca.lukegrahamlandry.firstmod.blocks.SadBlock;
 import ca.lukegrahamlandry.firstmod.blocks.MobSlayerBlock;
+import ca.lukegrahamlandry.firstmod.blocks.SadBlock;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegisterEvent;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BlockInit {
@@ -33,21 +34,24 @@ public class BlockInit {
     // automatically creates items for all your blocks
     // you could do it manually instead by registering BlockItems in your ItemInit class
     @SubscribeEvent
-    public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-        final IForgeRegistry<Item> registry = event.getRegistry();
+    public static void onRegisterItems(final RegisterEvent event) {
+        if (event.getRegistryKey().equals(ForgeRegistries.Keys.ITEMS)){
+            // for each block we registered above...
+            BLOCKS.getEntries().forEach( (blockRegistryObject) -> {
+                Block block = blockRegistryObject.get();
+                // make an item properties object that puts it in your creative tab
+                Item.Properties properties = new Item.Properties().tab(ItemInit.ModCreativeTab.instance);
 
-        // for each block we registered above...
-        BLOCKS.getEntries().stream().map(RegistryObject::get).forEach( (block) -> {
-            // make an item properties object that puts it in your creative tab
-            final Item.Properties properties = new Item.Properties().tab(ItemInit.ModCreativeTab.instance);
+                // make a block item that places the block
+                // note, if you have a special block that needs a custom implementation for the BlockItem, just add an if statement here
+                Supplier<Item> blockItemFactory = () -> new BlockItem(block, properties);
 
-            // make a block item that places the block
-            // note, if you have a special block that needs a custom implementation for the BlockItem, just add an if statement here
-            final BlockItem blockItem = new BlockItem(block, properties);
 
-            // register the block item with the same name as the block
-            blockItem.setRegistryName(block.getRegistryName());
-            registry.register(blockItem);
-        });
+                // register the block item with the same name as the block
+                event.register(ForgeRegistries.Keys.ITEMS, blockRegistryObject.getId(), blockItemFactory);
+            });
+        }
     }
 }
+
+
