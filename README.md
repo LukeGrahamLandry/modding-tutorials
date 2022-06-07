@@ -1,6 +1,6 @@
-# Minecraft Forge 1.17.1 Modding Tutorials
+# Minecraft Forge 1.18.2 Modding Tutorials
 - This repository has the code for my tutorials on creating minecraft mods with forge
-- Text tutorials: https://moddingtutorials.org/o17
+- Text tutorials: https://moddingtutorials.org/o18
 
 ## Contact
 - For any questions, problems, etc: https://discord.gg/VbZVnRd
